@@ -1,9 +1,60 @@
 import maquina.*
 
-describe "group of tests ..." {
+describe "pruebas de registro de maquina" {
 
-  test "test 1 ..." {
+  test "---indica si el registro incluye al menos un día en el que se produjo, exactamente, 49 piezas" {
+		maquina.listar()
+    maquina.algunDiaSeProdujo(49)
     assert.that(true)
-  }
-
+	}
+  test "---indica si el registro no incluye al menos un día en el que se produjo, exactamente, 52 piezas" {
+		maquina.listar()
+    maquina.algunDiaSeProdujo(52)
+    assert.notThat(false)
+	}
+  test "---el valor más alto de producción diaria incluido en el registro" {
+		maquina.listar()
+    maquina.maximoValorDeProduccion()
+    assert.equals(62, maquina.maximoValorDeProduccion())
+	}
+  test "---los valores pares incluidos, en el mismo orden en que aparecen en el registro" {
+		maquina.listar()
+    maquina.valoresDeProduccionPares()
+    assert.equals([18,62], maquina.valoresDeProduccionPares())
+	}
+  test "---indica si en cada día de que se tiene registro, la producción se encuentra entre los valores 10 y 100" {
+		maquina.listar()
+    maquina.produccionEsAcotada(10,100)
+    assert.that(true)
+	}
+  test "---indica si en cada día de que se tiene registro, la producción no se encuentra entre los valores 20 y 100" {
+		maquina.listar()
+    maquina.produccionEsAcotada(20,100)
+    assert.notThat(false)
+	}
+  test "---los valores de producción que superan el valor indicado, en el mismo orden en que aparecen en el registro" {
+		maquina.listar()
+    maquina.produccionesSuperioresA(35)
+    assert.equals([43,49,62,39], maquina.produccionesSuperioresA(35))
+	}
+  test "---la serie que resulta de sumar 5 a cada valor de producción diaria incluido en el registro" {
+		maquina.listar()
+    maquina.produccionesSumando(5)
+    assert.equals([48,23,54,67,38,44], maquina.produccionesSumando(5))
+	}
+  test "---el total de piezas producidas por la máquina, de acuerdo a la información incluida en el registro" {
+		maquina.listar()
+    maquina.totalProducido()
+    assert.equals(244, maquina.totalProducido())
+	}
+  test "---el último valor registrado" {
+		maquina.listar()
+    maquina.ultimoValorDeProduccion()
+    assert.equals(39, maquina.ultimoValorDeProduccion())
+	}
+  test "---la cantidad de valores de producción diaria que superan a la producción indicada para el primer día de operación" {
+		maquina.listar()
+    maquina.cantidadProduccionesMayorALaPrimera()
+    assert.equals(2, maquina.cantidadProduccionesMayorALaPrimera())
+	}
 }
